@@ -9,5 +9,6 @@ public class Constants {
 	public static final String RATE_AMOUNT="amount";
 	public static final String RATE_API_SUCCES="succes";
 	public static final String RATE_API_FAIL="fail";
+	public static final String NOT_FOUND_ERROR_MSG = "RateId not found in RMS";
 	
 }

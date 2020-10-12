@@ -1,5 +1,7 @@
 package com.demo.retail.hibernate.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,9 +24,9 @@ public class RateEntity {
 	@Column(name = "RateDescription", nullable = true)
 	private String description;
 	@Column(name = "RateEffectiveDate", nullable = false)
-	private String effectiveDate;
+	private Date effectiveDate;
 	@Column(name = "RateExpirationDate", nullable = false)
-	private String expireationDate;
+	private Date expireationDate;
 	@Column(name = "amount", nullable = false)
 	private Integer amount;
 

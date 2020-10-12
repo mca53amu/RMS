@@ -1,5 +1,8 @@
 package com.demo.retail.mapper;
 
+
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.demo.retail.constants.ApiResponseStatus;
@@ -20,8 +23,8 @@ public class RateEntityMapper {
 		RateResponse response=new RateResponse(ApiResponseStatus.SUCCESS);
 		response.setAmount(entity.getAmount());
 		response.setDescription(entity.getDescription());
-		response.setEffectiveDate(entity.getEffectiveDate());
-		response.setExpireationDate(entity.getExpireationDate());
+		response.setEffectiveDate(entity.getEffectiveDate().toString());
+		response.setExpireationDate(entity.getExpireationDate().toString());
 		response.setId(entity.getId());
 		return response;
 	}
@@ -30,8 +33,8 @@ public class RateEntityMapper {
 		entity.setId(request.getId());
 		entity.setAmount(request.getAmount());
 		entity.setDescription(request.getDescription());
-		entity.setEffectiveDate(request.getEffectiveDate());
-		entity.setExpireationDate(request.getExpireationDate());
+		entity.setEffectiveDate(Date.valueOf(request.getEffectiveDate()));
+		entity.setExpireationDate(Date.valueOf(request.getExpireationDate()));
 		return entity;
 	}
 	

@@ -1,7 +1,7 @@
 package com.demo.retail.controller;
 
 import java.util.Optional;
-
+import static com.demo.retail.constants.Constants.NOT_FOUND_ERROR_MSG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.retail.constants.ApiResponseStatus;
+import com.demo.retail.constants.Constants;
 import com.demo.retail.exception.NotFoundException;
 import com.demo.retail.hibernate.entity.RateEntity;
 import com.demo.retail.mapper.RateEntityMapper;
@@ -38,7 +39,7 @@ public class RateController {
 	public ResponseEntity<RateResponse> getRate(@PathVariable Long id) throws Exception{
 		
 		Optional<RateEntity> entityOptional = rateService.find(id);
-		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException("RateId not found in RMS"));
+		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException(Constants.NOT_FOUND_ERROR_MSG));
 		RateResponse execute = mapper.execute(entity);
 		return ResponseEntity.ok(execute);
 	}
@@ -55,7 +56,7 @@ public class RateController {
 	@PostMapping("/update/{id}")
 	public ResponseEntity<RateResponse> update(@PathVariable Long id,@RequestBody RateRequest requst)throws Exception {
 		Optional<RateEntity> entityOptional = rateService.find(id);
-		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException("RateId not found in RMS"));
+		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException(NOT_FOUND_ERROR_MSG));
 		entity=mapper.copyValues(entity,requst);
 		RateEntity add = rateService.add(entity);
 		RateResponse response = mapper.execute(add);
@@ -65,7 +66,7 @@ public class RateController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<ApiResponse> delete(@PathVariable Long id) throws Exception{
 		Optional<RateEntity> entityOptional = rateService.find(id);
-		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException("RateId not found in RMS"));
+		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException(NOT_FOUND_ERROR_MSG));
 		rateService.delete(entity);
 		return ResponseEntity.ok(new ApiResponse(ApiResponseStatus.SUCCESS));
 	}
