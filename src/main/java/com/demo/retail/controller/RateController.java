@@ -2,6 +2,9 @@ package com.demo.retail.controller;
 
 import java.util.Optional;
 import static com.demo.retail.constants.Constants.NOT_FOUND_ERROR_MSG;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.retail.advice.RateControllerAdvice;
 import com.demo.retail.constants.ApiResponseStatus;
 import com.demo.retail.constants.Constants;
 import com.demo.retail.exception.NotFoundException;
@@ -26,7 +30,7 @@ import com.demo.retail.service.RateService;
 @RestController
 @RequestMapping("/surcharge")
 public class RateController {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(RateController.class);
 	@Autowired 
 	private RateService rateService;
 	
