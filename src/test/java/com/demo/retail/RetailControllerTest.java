@@ -61,7 +61,7 @@ public class RetailControllerTest {
 	}
 	
 	@Test
-	public void shouldGetUpddate() throws Exception {
+	public void shouldUpdate() throws Exception {
 		RateEntity entity = new RateEntity();
 		Optional<RateEntity> entityOptional = Optional.of(entity);
 		given(rateService.find(1L)).thenReturn(entityOptional);
@@ -70,7 +70,7 @@ public class RetailControllerTest {
 	}
 	
 	@Test
-	public void shouldGetDelete() throws Exception {
+	public void shouldDelete() throws Exception {
 		RateEntity entity = new RateEntity();
 		Optional<RateEntity> entityOptional = Optional.of(entity);
 		given(rateService.find(1L)).thenReturn(entityOptional);
