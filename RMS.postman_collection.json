@@ -148,41 +148,6 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/surcharge/delete/1",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"surcharge",
-						"delete",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost:8080/surcharge/add",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM3NDU0NjksImlhdCI6MTYwMzcyNzQ2OX0.se8aaARiNJcsAe3-_ksgGk8xex80ugGocmhqc1HFsa0t2V7w0cnvKYL1DNRcRtxXGxHtixGh_BlyeRZix-5ipA",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "  {\r\n        \r\n        \"description\": \"TEST Updated description\",\r\n        \"effectiveDate\": \"2015-12-17\",\r\n        \"expirationDate\": \"2020-12-17\",\r\n        \"amount\": 3434\r\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
 					"raw": "localhost:8080/surcharge/delete/2",
 					"host": [
 						"localhost"
