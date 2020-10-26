@@ -13,8 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RateRequest {
-	@JsonProperty(value =Constants.RATE_ID)
-	private Long id;
 	@JsonProperty(value =Constants.RATE_DESCRIPTION)
 	private String description;
 	@JsonProperty(value =Constants.RATE_EFFECTIVE_DATE)
