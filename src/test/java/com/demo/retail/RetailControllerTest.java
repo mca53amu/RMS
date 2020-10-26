@@ -7,21 +7,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.demo.retail.constants.ApiResponseStatus;
 import com.demo.retail.controller.RateController;
 import com.demo.retail.hibernate.entity.RateEntity;
 import com.demo.retail.mapper.RateEntityMapper;
 import com.demo.retail.request.RateRequest;
-import com.demo.retail.response.RateResponse;
+import com.demo.retail.response.ApiResponse;
 import com.demo.retail.service.RateService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 @WebMvcTest(controllers = RateController.class)
 public class RetailControllerTest {
 	@Autowired
@@ -34,10 +31,10 @@ public class RetailControllerTest {
 	private RateEntityMapper mapper;
 
 	@Test
-	public void shouldReturn404WhenFIndUserById() {
+	public void shouldReturn404WhenFIndUserById() throws Exception {
 		
 		final long userId=1L;
-		given(rateService.find(userId)).willReturn(Optional.empty());
+		when(rateService.find(userId)).thenReturn((Optional.empty()));
 		mockMvc.perform(get("get/{id}", -1L)).andExpect(status().isNotFound());
 		
 	}
@@ -46,8 +43,8 @@ public class RetailControllerTest {
 	public void shouldGetRate() throws Exception {
 		RateEntity entity = new RateEntity();
 		Optional<RateEntity> entityOptional = Optional.of(entity);
-		given(rateService.find(1L)).thenReturn(entityOptional);
-		given(mapper.execute(entity)).thenReturn(new RateResponse("success"));
+		when(rateService.find(1L)).thenReturn(entityOptional);
+		when(mapper.execute(entity)).thenReturn(new ApiResponse<>(ApiResponseStatus.SUCCESS));
 		mockMvc.perform(get("get/{id}", 1L)).andExpect(status().isOk());
 	}
 	
@@ -55,8 +52,8 @@ public class RetailControllerTest {
 	public void shouldAdd() throws Exception {
 		RateEntity entity = new RateEntity();
 		Optional<RateEntity> entityOptional = Optional.of(entity);
-		given(mapper.execute(new RateRequest())).thenReturn(entity);
-		given(rateService.add(entity)).thenReturn(entityOptional);
+		when(mapper.execute(new RateRequest())).thenReturn(entity);
+		when(rateService.add(entity)).thenReturn(entityOptional.get());
 		mockMvc.perform(get("/surcharge/get/{id}", 1L)).andExpect(status().isOk());
 	}
 	
@@ -64,8 +61,8 @@ public class RetailControllerTest {
 	public void shouldUpdate() throws Exception {
 		RateEntity entity = new RateEntity();
 		Optional<RateEntity> entityOptional = Optional.of(entity);
-		given(rateService.find(1L)).thenReturn(entityOptional);
-		given(rateService.add(entity)).thenReturn(entityOptional);
+		when(rateService.find(1L)).thenReturn(entityOptional);
+		when(rateService.add(entity)).thenReturn(entityOptional.get());
 		mockMvc.perform(get("/surcharge/update/{id}", 1L)).andExpect(status().isOk());
 	}
 	
@@ -73,8 +70,8 @@ public class RetailControllerTest {
 	public void shouldDelete() throws Exception {
 		RateEntity entity = new RateEntity();
 		Optional<RateEntity> entityOptional = Optional.of(entity);
-		given(rateService.find(1L)).thenReturn(entityOptional);
-		given(mapper.execute(entity)).thenReturn(new RateResponse("success"));
+		when(rateService.find(1L)).thenReturn(entityOptional);
+		when(mapper.execute(entity)).thenReturn(new ApiResponse<>(ApiResponseStatus.SUCCESS));
 		mockMvc.perform(get("/surchare/get/{id}", 1L)).andExpect(status().isOk());
 	}
 }

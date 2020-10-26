@@ -10,13 +10,13 @@ import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.demo.retail.hibernate.entity.RateEntity;
 import com.demo.retail.repository.RateRepository;
 import com.demo.retail.service.RateServiceImpl;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class RateServiceTest {
 
 	@Mock
@@ -32,7 +32,7 @@ public class RateServiceTest {
 		entity.setAmount(25);
 		entity.setDescription("2018-09-20");
 		Optional<RateEntity> rateEntityOptional=Optional.of(entity);
-		given(repository.findById(new Long(1))).thenReturn(rateEntityOptional);
+		when(repository.findById(new Long(1))).thenReturn(rateEntityOptional);
 		Optional<RateEntity> expected = rateService.find(1L);
 		assertThat(expected).isNotNull();
 		
@@ -44,7 +44,7 @@ public class RateServiceTest {
 		entity.setId(1L);
 		entity.setAmount(25);
 		entity.setDescription("2018-09-20");
-		given(repository.save(entity)).thenReturn(entity);
+		when(repository.save(entity)).thenReturn(entity);
 		RateEntity expected = rateService.add(entity);
 		assertThat(expected).isNotNull();
 		
