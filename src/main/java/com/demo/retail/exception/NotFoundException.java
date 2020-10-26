@@ -1,6 +1,6 @@
 package com.demo.retail.exception;
 
-public class NotFoundException extends RateException{
+public class NotFoundException extends ApiException{
 
 	
 	public NotFoundException(String message) {

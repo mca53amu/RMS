@@ -26,53 +26,50 @@ import com.demo.retail.response.ApiResponse;
 import com.demo.retail.response.RateResponse;
 import com.demo.retail.service.RateService;
 
-
 @RestController
 @RequestMapping("/surcharge")
 public class RateController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RateController.class);
-	@Autowired 
+	@Autowired
 	private RateService rateService;
-	
+
 	@Autowired
 	private RateEntityMapper mapper;
-	
-	
-	
+
 	@GetMapping("/get/{id}")
-	public ResponseEntity<RateResponse> getRate(@PathVariable Long id) throws Exception{
-		
+	public ApiResponse<RateResponse> getRate(@PathVariable Long id) throws Exception {
+
 		Optional<RateEntity> entityOptional = rateService.find(id);
-		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException(Constants.NOT_FOUND_ERROR_MSG));
-		RateResponse execute = mapper.execute(entity);
-		return ResponseEntity.ok(execute);
+		RateEntity entity = entityOptional.orElseThrow(() -> new NotFoundException(Constants.NOT_FOUND_ERROR_MSG));
+		ApiResponse<RateResponse> execute = mapper.execute(entity);
+		return execute;
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<RateResponse> add(@RequestBody RateRequest request)throws Exception {
-		
+	public ApiResponse<RateResponse> add(@RequestBody RateRequest request) throws Exception {
+
 		RateEntity execute = mapper.execute(request);
 		RateEntity entity = rateService.add(execute);
-		RateResponse response=mapper.execute(entity);
-		return ResponseEntity.ok(response);
+		ApiResponse<RateResponse> response = mapper.execute(entity);
+		return response;
 	}
 
 	@PostMapping("/update/{id}")
-	public ResponseEntity<RateResponse> update(@PathVariable Long id,@RequestBody RateRequest requst)throws Exception {
+	public ApiResponse<RateResponse> update(@PathVariable Long id, @RequestBody RateRequest requst) throws Exception {
 		Optional<RateEntity> entityOptional = rateService.find(id);
-		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException(NOT_FOUND_ERROR_MSG));
-		entity=mapper.copyValues(entity,requst);
+		RateEntity entity = entityOptional.orElseThrow(() -> new NotFoundException(NOT_FOUND_ERROR_MSG));
+		entity = mapper.copyValues(entity, requst);
 		RateEntity add = rateService.add(entity);
-		RateResponse response = mapper.execute(add);
-		return ResponseEntity.ok(response);
+		ApiResponse<RateResponse> response = mapper.execute(add);
+		return response;
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<ApiResponse> delete(@PathVariable Long id) throws Exception{
+	public ApiResponse<RateResponse> delete(@PathVariable Long id) throws Exception {
 		Optional<RateEntity> entityOptional = rateService.find(id);
-		RateEntity entity = entityOptional.orElseThrow(()-> new NotFoundException(NOT_FOUND_ERROR_MSG));
+		RateEntity entity = entityOptional.orElseThrow(() -> new NotFoundException(NOT_FOUND_ERROR_MSG));
 		rateService.delete(entity);
-		return ResponseEntity.ok(new ApiResponse(ApiResponseStatus.SUCCESS));
+		return new ApiResponse<RateResponse>(ApiResponseStatus.SUCCESS);
 	}
 
 }

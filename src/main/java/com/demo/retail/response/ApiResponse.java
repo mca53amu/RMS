@@ -8,12 +8,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class ApiResponse {
-	
+public class ApiResponse<T> {
+
 	private ApiResponseStatus status;
-	
-	
-	
+	private T response;
+
+	public ApiResponse(ApiResponseStatus status, T response) {
+		this.status = status;
+		this.response = response;
+	}
+
+	public ApiResponse(ApiResponseStatus status) {
+		this.status=status;
+	}
 
 }

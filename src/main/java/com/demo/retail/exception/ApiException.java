@@ -5,15 +5,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RateException extends RuntimeException {
+public class ApiException extends RuntimeException {
 
 	private String message;
 
-	public RateException(Throwable t) {
+	public ApiException(Throwable t) {
 		this.message= t.getMessage();
 	}
 	
-	public RateException(String message) {
+	public ApiException(String message) {
 		this.message=message;
 	}
 }

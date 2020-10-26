@@ -1,6 +1,5 @@
 package com.demo.retail.response;
 
-import com.demo.retail.constants.ApiResponseStatus;
 import com.demo.retail.constants.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class RateResponse extends ApiResponse {
+public class RateResponse{
 
 	@JsonProperty(value = Constants.RATE_ID)
 	private Long id;
@@ -20,9 +19,4 @@ public class RateResponse extends ApiResponse {
 	private String expireationDate;
 	@JsonProperty(value = Constants.RATE_AMOUNT)
 	private int amount;
-	
-	public RateResponse(ApiResponseStatus	status) {
-		super(status);
-	}
-
 }
