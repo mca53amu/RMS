@@ -77,5 +77,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>retail-menagement-service</finalName>
 	</build>
 </project>
