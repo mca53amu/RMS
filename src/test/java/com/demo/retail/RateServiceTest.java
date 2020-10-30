@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -45,9 +44,10 @@ public class RateServiceTest {
 		Optional<RateEntity> rateEntityOptional = Optional.of(entity);
 		Mockito.when(repository.findById(new Long(1))).thenReturn(rateEntityOptional);
 		Optional<RateEntity> expected = rateService.find(1L);
-		assertThat(expected).isNotNull();
+		assertThat(expected).isNotEmpty();
 
 	}
+	
 
 	@Test
 	public void testAdd() {
@@ -57,13 +57,13 @@ public class RateServiceTest {
 		assertThat(expected).isNotNull();
 
 	}
-
+	
 	@Test
 	public void testDelete() {
 		RateEntity entity = getEntityObject();
 		Mockito.doNothing().when(repository).delete(entity);
 		rateService.delete(entity);
-		verify(rateService, times(1)).delete(entity);
+		verify(repository, times(1)).delete(entity);
 	}
 
 	private RateEntity getEntityObject() {

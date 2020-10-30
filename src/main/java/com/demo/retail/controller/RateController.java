@@ -30,7 +30,6 @@ import com.demo.retail.service.RateService;
 @RestController
 @RequestMapping("/surcharge")
 public class RateController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(RateController.class);
 	@Autowired
 	private RateService rateService;
 

@@ -28,7 +28,7 @@ public class RateRequest {
 	@JsonProperty(value =Constants.RATE_EFFECTIVE_DATE)
 	private String effectiveDate;
 	@JsonProperty(value =Constants.RATE_EXPIRATION_DATE)
-	@NotNull
+	@ValidDate
 	private String expireationDate;
 	@JsonProperty(value =Constants.RATE_AMOUNT)
 	@NotNull
