@@ -7,6 +7,10 @@ import lombok.Setter;
 @Setter
 public class ApiException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3069953004727956326L;
 	private String message;
 
 	public ApiException(Throwable t) {

@@ -9,5 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RateError{
 
+	private String errorCode;
+	
 	private String errorMessage;
+	
+	
 }

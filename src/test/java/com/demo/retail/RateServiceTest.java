@@ -1,64 +1,77 @@
 package com.demo.retail;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.demo.retail.hibernate.entity.RateEntity;
 import com.demo.retail.repository.RateRepository;
+import com.demo.retail.service.RateService;
 import com.demo.retail.service.RateServiceImpl;
 
-@SpringBootTest
+@RunWith(SpringRunner.class)
 public class RateServiceTest {
 
-	@Mock
+	@TestConfiguration
+	static class EmployeeServiceImplTestContextConfiguration {
+
+		@Bean
+		public RateService employeeService() {
+			return new RateServiceImpl();
+		}
+	}
+
+	@MockBean
 	private RateRepository repository;
-	
-	@InjectMocks
+
+	@Autowired
 	private RateServiceImpl rateService;
 
 	@Test
 	public void testFind() {
-		RateEntity entity = new RateEntity();
-		entity.setId(1L);
-		entity.setAmount(25);
-		entity.setDescription("2018-09-20");
-		Optional<RateEntity> rateEntityOptional=Optional.of(entity);
-		when(repository.findById(new Long(1))).thenReturn(rateEntityOptional);
+		RateEntity entity = getEntityObject();
+		Optional<RateEntity> rateEntityOptional = Optional.of(entity);
+		Mockito.when(repository.findById(new Long(1))).thenReturn(rateEntityOptional);
 		Optional<RateEntity> expected = rateService.find(1L);
 		assertThat(expected).isNotNull();
-		
+
 	}
-	
+
 	@Test
 	public void testAdd() {
-		RateEntity entity = new RateEntity();
-		entity.setId(1L);
-		entity.setAmount(25);
-		entity.setDescription("2018-09-20");
-		when(repository.save(entity)).thenReturn(entity);
+		RateEntity entity = getEntityObject();
+		Mockito.when(repository.save(entity)).thenReturn(entity);
 		RateEntity expected = rateService.add(entity);
 		assertThat(expected).isNotNull();
-		
+
 	}
-	
+
 	@Test
 	public void testDelete() {
+		RateEntity entity = getEntityObject();
+		Mockito.doNothing().when(repository).delete(entity);
+		rateService.delete(entity);
+		verify(rateService, times(1)).delete(entity);
+	}
+
+	private RateEntity getEntityObject() {
 		RateEntity entity = new RateEntity();
 		entity.setId(1L);
 		entity.setAmount(25);
 		entity.setDescription("2018-09-20");
-		Optional<RateEntity> rateEntityOptional=Optional.of(entity);
-		when(repository.delete(entity)).thenDoNothing();
-		rateService.delete(entity);
-		verify(entity);
+		return entity;
 	}
+
 }

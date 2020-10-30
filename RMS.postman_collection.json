@@ -161,6 +161,84 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Metrics",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM5OTM1MjQsImlhdCI6MTYwMzk3NTUyNH0.37y14E5tF4PTQFpmrp3jKA5Hzo1ZJy-DVMfaNLdt058vK51rQysn6cDUgGZMuByf4ZgqECodZ0-23d4vOZnc4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/actuator/metrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM5OTM1MjQsImlhdCI6MTYwMzk3NTUyNH0.37y14E5tF4PTQFpmrp3jKA5Hzo1ZJy-DVMfaNLdt058vK51rQysn6cDUgGZMuByf4ZgqECodZ0-23d4vOZnc4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ENVIRONMENT",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM5OTM1MjQsImlhdCI6MTYwMzk3NTUyNH0.37y14E5tF4PTQFpmrp3jKA5Hzo1ZJy-DVMfaNLdt058vK51rQysn6cDUgGZMuByf4ZgqECodZ0-23d4vOZnc4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/actuator/env",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"env"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

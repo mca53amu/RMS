@@ -1,12 +1,14 @@
 package com.demo.retail.controller;
 
-import java.util.Optional;
 import static com.demo.retail.constants.Constants.NOT_FOUND_ERROR_MSG;
+
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.retail.advice.RateControllerAdvice;
 import com.demo.retail.constants.ApiResponseStatus;
 import com.demo.retail.constants.Constants;
 import com.demo.retail.exception.NotFoundException;
@@ -46,7 +47,7 @@ public class RateController {
 	}
 
 	@PostMapping("/add")
-	public ApiResponse<RateResponse> add(@RequestBody RateRequest request) throws Exception {
+	public ApiResponse<RateResponse> add(@Valid  @RequestBody RateRequest request) throws Exception {
 
 		RateEntity execute = mapper.execute(request);
 		RateEntity entity = rateService.add(execute);

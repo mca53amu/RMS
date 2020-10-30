@@ -7,12 +7,14 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.retail.constants.ApiResponseStatus;
+import com.demo.retail.exception.NotFoundException;
 import com.demo.retail.model.JwtRequest;
 import com.demo.retail.model.JwtResponse;
 import com.demo.retail.response.ApiResponse;
@@ -51,5 +53,15 @@ public class JWTAuthController {
 		} catch (BadCredentialsException e) {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
+	}
+
+	/**
+	 * Defalult Handler
+	 */
+	@PostMapping("/error")
+	public void error() {
+
+		throw new NotFoundException("Not found");
+
 	}
 }

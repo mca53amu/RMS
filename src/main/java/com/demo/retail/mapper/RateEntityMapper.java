@@ -30,7 +30,7 @@ public class RateEntityMapper {
 	}
 
 	public RateEntity copyValues(RateEntity entity, RateRequest request) {
-		entity.setAmount(request.getAmount());
+		entity.setAmount(request.getAmount().intValue());
 		entity.setDescription(request.getDescription());
 		entity.setEffectiveDate(Date.valueOf(request.getEffectiveDate()));
 		entity.setExpireationDate(Date.valueOf(request.getExpireationDate()));
