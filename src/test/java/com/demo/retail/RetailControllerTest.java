@@ -47,7 +47,8 @@ public class RetailControllerTest {
 		RateEntity entityObject = getEntityObject();
 		Mockito.when(rateService.find(1L)).thenReturn(Optional.of(entityObject));
 		Mockito.when(mapper.execute(entityObject)).thenCallRealMethod();
-		mvc.perform(get("/surcharge/get/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mvc.perform(get("/surcharge/get/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.status", is("SUCCESS")));
 
 	}
 
@@ -74,8 +75,7 @@ public class RetailControllerTest {
 		Mockito.when(rateService.add(entityObject)).thenReturn(entityObject);
 		Mockito.when(mapper.execute(entityObject)).thenCallRealMethod();
 		mvc.perform(post("/surcharge/update/{id}", 1L).contentType(MediaType.APPLICATION_JSON)
-				.content(asJsonString(request))).andExpect(status().isOk())
-				.andExpect(jsonPath("$.status", is("SUCCESS")));
+				.content(asJsonString(request))).andExpect(status().isOk());
 
 	}
 
