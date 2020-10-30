@@ -17,7 +17,7 @@ docker run -t --link docker-mysql:mysql -p 8080:8080 retail-management-system
 
 web sequence diagram
 
-title Retail Management System
+title Rate Management System
 
 User->Logging Fileter: Authentication \n Request
 note right of Logging Fileter:Generate Log Id
