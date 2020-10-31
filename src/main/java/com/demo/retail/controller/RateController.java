@@ -37,39 +37,39 @@ public class RateController {
 	private RateEntityMapper mapper;
 
 	@GetMapping("/get/{id}")
-	public ApiResponse<RateResponse> getRate(@PathVariable Long id) throws Exception {
+	public ApiResponse getRate(@PathVariable Long id) throws Exception {
 
 		Optional<RateEntity> entityOptional = rateService.find(id);
 		RateEntity entity = entityOptional.orElseThrow(() -> new NotFoundException(Constants.NOT_FOUND_ERROR_MSG));
-		ApiResponse<RateResponse> execute = mapper.execute(entity);
+		ApiResponse execute = mapper.execute(entity);
 		return execute;
 	}
 
 	@PostMapping("/add")
-	public ApiResponse<RateResponse> add(@Valid  @RequestBody RateRequest request) throws Exception {
+	public ApiResponse add(@Valid  @RequestBody RateRequest request) throws Exception {
 
 		RateEntity execute = mapper.execute(request);
 		RateEntity entity = rateService.add(execute);
-		ApiResponse<RateResponse> response = mapper.execute(entity);
+		ApiResponse response = mapper.execute(entity);
 		return response;
 	}
 
 	@PostMapping("/update/{id}")
-	public ApiResponse<RateResponse> update(@PathVariable Long id, @RequestBody RateRequest requst) throws Exception {
+	public ApiResponse update(@PathVariable Long id,@Valid @RequestBody RateRequest requst) throws Exception {
 		Optional<RateEntity> entityOptional = rateService.find(id);
 		RateEntity entity = entityOptional.orElseThrow(() -> new NotFoundException(NOT_FOUND_ERROR_MSG));
 		entity = mapper.copyValues(entity, requst);
 		RateEntity add = rateService.add(entity);
-		ApiResponse<RateResponse> response = mapper.execute(add);
+		ApiResponse response = mapper.execute(add);
 		return response;
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ApiResponse<RateResponse> delete(@PathVariable Long id) throws Exception {
+	public ApiResponse delete(@PathVariable Long id) throws Exception {
 		Optional<RateEntity> entityOptional = rateService.find(id);
 		RateEntity entity = entityOptional.orElseThrow(() -> new NotFoundException(NOT_FOUND_ERROR_MSG));
 		rateService.delete(entity);
-		return new ApiResponse<RateResponse>(ApiResponseStatus.SUCCESS);
+		return new  RateResponse();
 	}
 
 }

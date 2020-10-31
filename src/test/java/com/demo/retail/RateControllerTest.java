@@ -2,7 +2,6 @@ package com.demo.retail;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mockitoSession;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-public class RetailControllerTest {
+public class RateControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -74,7 +73,7 @@ public class RetailControllerTest {
 		Mockito.when(mapper.copyValues(entityObject, request)).thenCallRealMethod();
 		Mockito.when(rateService.add(entityObject)).thenReturn(entityObject);
 		Mockito.when(mapper.execute(entityObject)).thenCallRealMethod();
-		mvc.perform(post("/surcharge/update/{id}", 1L).contentType(MediaType.APPLICATION_JSON)
+		mvc.perform(post("/surcharge/update/{id}", 1).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(asJsonString(request))).andExpect(status().isOk());
 
 	}
@@ -84,10 +83,7 @@ public class RetailControllerTest {
 
 		final long userId = 1L;
 		Mockito.when(rateService.find(userId)).thenReturn((Optional.empty()));
-		mvc.perform(get("/surcharge/get/{id}", -1L)).andExpect(status().isOk())
-				.andExpect(jsonPath("$.status", is("FAIL")));
-		;
-
+		mvc.perform(get("/surcharge/get/{id}", 1)).andExpect(status().isNotFound());
 	}
 
 	@Test
@@ -96,7 +92,7 @@ public class RetailControllerTest {
 		final long userId = 1L;
 		Mockito.when(rateService.find(userId)).thenReturn((Optional.empty()));
 		try {
-			mvc.perform(get("/surcharge/get/{id}", -1L));
+			mvc.perform(get("/surcharge/get/{id}", 1));
 		} catch (Exception e) {
 			assertEquals("RateId not found in RMS", e.getMessage());
 		}
@@ -115,17 +111,18 @@ public class RetailControllerTest {
 
 	private RateRequest getRequestObject() {
 		RateRequest requestObject = new RateRequest();
-		requestObject.setAmount(new BigDecimal(24));
 		requestObject.setDescription("Test Description");
 		requestObject.setEffectiveDate("2018-09-20");
 		requestObject.setExpireationDate("2018-09-20");
+		requestObject.setAmount(new BigDecimal(24));
+		requestObject.setSurcharge(new BigDecimal(24));
 		return requestObject;
 	}
 
 	private RateEntity getEntityObject() {
 		RateEntity entity = new RateEntity();
 		entity.setId(1L);
-		entity.setAmount(25);
+		entity.setAmount(25.7F);
 		entity.setDescription("Description");
 		entity.setEffectiveDate(Date.valueOf("2018-09-20"));
 		entity.setExpireationDate(Date.valueOf("2018-09-20"));

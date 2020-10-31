@@ -7,6 +7,7 @@ public class Constants {
 	public static final String RATE_EXPIRATION_DATE="expirationDate";
 	public static final String RATE_EFFECTIVE_DATE="effectiveDate";
 	public static final String RATE_AMOUNT="amount";
+	public static final String SURCHARGE="surcharge";
 	public static final String RATE_API_SUCCES="succes";
 	public static final String RATE_API_FAIL="fail";
 	public static final String NOT_FOUND_ERROR_MSG = "RateId not found in RMS";

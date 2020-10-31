@@ -33,7 +33,7 @@ public class JWTAuthController {
 	private JWTUserDetailsService userDetailsService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public ApiResponse<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
+	public JwtResponse createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
 			throws Exception {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -42,7 +42,7 @@ public class JWTAuthController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
-		return new ApiResponse<JwtResponse>(ApiResponseStatus.SUCCESS, new JwtResponse(token));
+		return new JwtResponse(token);
 	}
 
 	private void authenticate(String username, String password) throws Exception {
@@ -61,7 +61,7 @@ public class JWTAuthController {
 	@PostMapping("/error")
 	public void error() {
 
-		throw new NotFoundException("Not found");
+		throw new NotFoundException("Fallback end point executed");
 
 	}
 }

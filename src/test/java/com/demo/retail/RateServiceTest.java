@@ -69,7 +69,7 @@ public class RateServiceTest {
 	private RateEntity getEntityObject() {
 		RateEntity entity = new RateEntity();
 		entity.setId(1L);
-		entity.setAmount(25);
+		entity.setAmount(25.40F);
 		entity.setDescription("2018-09-20");
 		return entity;
 	}

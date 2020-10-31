@@ -40,3 +40,10 @@ repo->Service:Entity Object
 Service->controller:Reponse Object
 controller ->Validator: Response
 Validator->User:Response
+prometheous:Dashboard
+system_cpu_usage
+jvm_memory_max_bytes
+http_server_requests_seconds_count
+logback_events_total
+hikaricp_connections_acquire_seconds_count
+http_server_requests_seconds_max

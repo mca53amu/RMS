@@ -20,8 +20,6 @@ import com.demo.retail.request.validate.ValidDate;
 @AllArgsConstructor
 public class RateRequest {
 	
-	@Size(min = 2, message = "Description should have atleast 2 characters")
-	@NotNull
 	@JsonProperty(value =Constants.RATE_DESCRIPTION)
 	private String description;
 	@ValidDate
@@ -34,5 +32,8 @@ public class RateRequest {
 	@NotNull
 	@Positive
 	private BigDecimal amount;
+	@NotNull
+	@Positive
+	private BigDecimal surcharge;
 
 }

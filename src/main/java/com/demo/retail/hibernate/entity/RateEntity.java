@@ -21,13 +21,15 @@ public class RateEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "RateId", nullable = false)
 	private Long id;
-	@Column(name = "RateDescription", nullable = true)
+	@Column(name = "RateDescription")
 	private String description;
 	@Column(name = "RateEffectiveDate", nullable = false)
 	private Date effectiveDate;
 	@Column(name = "RateExpirationDate", nullable = false)
 	private Date expireationDate;
 	@Column(name = "amount", nullable = false)
-	private Integer amount;
+	private Float amount;
+	@Column(name = "surcharge", nullable = false)
+	private Float surcharge;
 
 }
